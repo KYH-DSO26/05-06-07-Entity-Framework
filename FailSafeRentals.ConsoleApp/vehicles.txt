@@ -1,0 +1,200 @@
+RegistrationNumber	Brand	Model	DailyRate	IsAvailable
+ABC123	Volvo	XC60	895.00	true
+DEF456	Polestar	2	950.50	true
+JKL012	Volkswagen	ID.4	795.00	true
+STU901	Kia	EV6	820.75	true
+VWX234	Volvo	V60	740.00	true
+YZA567	Tesla	Model 3	990.00	false
+BCD890	Toyota	RAV4	780.50	true
+EFG123	Skoda	Enyaq	760.00	true
+HIJ456	BMW	i4	1150.00	true
+KLM789	Audi	Q4 e-tron	1090.25	true
+NOP012	Mercedes-Benz	EQA	1050.00	false
+QRS345	Volvo	EX30	690.50	true
+TUV678	Volkswagen	Golf	595.00	true
+VOLVO-XC90-MAX	Volvo	XC90	1290.00	true
+WXY901	Kia	Niro EV	680.00	true
+ZAB234	Hyundai	Ioniq 5	840.50	true
+CDE567	Ford	Mustang Mach-E	920.00	true
+FGH890	Nissan	Ariya	810.25	true
+IJK123	Peugeot	e-208	540.00	true
+LMN456	Renault	Megane E-Tech	650.50	true
+OPQ789	Volvo	XC40	790.00	false
+RST012	Polestar	3	1350.00	true
+UVW345	Tesla	Model Y	1020.50	true
+XYZ678	Toyota	Corolla	580.00	true
+AAA111	Skoda	Octavia	640.75	true
+BBB222	BMW	320d	890.00	true
+	Audi	A4	870.00	true
+CCC333	Mercedes-Benz	C220	960.50	true
+DDD444	Volkswagen	Passat	720.00	true
+EEE555	Kia	Sportage	750.00	false
+FFF666	Hyundai	Kona Electric	630.25	true
+GGG777	Volvo	S60	760.00	true
+HHH888	Ford	Focus	560.50	true
+III999	Nissan	Leaf	520.00	true
+JJJ000	Peugeot	3008	710.00	true
+KKK112	Renault	Clio	490.50	true
+LLL223	Toyota	Yaris	480.00	true
+MMM334	Skoda	Kamiq	610.00	true
+NNN445	Volvo	V90	880.50	false
+OOO556	BMW	X3	1120.00	true
+PPP667	Audi	A6	1080.00	true
+DEF456	Polestar	2	950.50	true
+QQQ778	Mercedes-Benz	GLC	1190.00	true
+RRR889	Volkswagen	Tiguan	780.25	true
+SSS990	Kia	Ceed	570.00	true
+TTT121	Hyundai	Tucson	740.50	true
+UUU232	Tesla	Model S	1450.00	true
+VVV343	Volvo	EX90	1390.00	true
+WWW454	Ford	Kuga	730.00	false
+XXX565	Nissan	Qashqai	695.50	true
+YYY676	Peugeot	e-2008	620.00	true
+ZZZ787	Renault	Captur	585.00	true
+ABA898	Toyota	C-HR	670.25	true
+ACA909	Skoda	Superb	770.00	true
+ADA010	BMW	iX1	980.00	true
+AEA121	Audi	Q3	910.50	true
+AFA232	Mercedes-Benz	A200	790.00	true
+AGA343	Volkswagen	Polo	495.00	true
+AHA454	Volvo	XC60	695,50	true
+AIA565	Kia	Sorento	890.00	true
+AJA676	Hyundai	Ioniq 6	875.50	true
+AKA787	Polestar	4	1120.00	false
+ALA898	Tesla	Model 3	990.00	true
+AMA909	Ford	Puma	590.25	true
+ANA010	Nissan	Juke	550.00	true
+AOA121	Peugeot	508	780.00	true
+APA232	Renault	Austral	745.50	true
+AQA343	Toyota	Camry	795.00	true
+ARA454	Skoda	Kodiaq	850.00	true
+ASA565	BMW	520d	1040.50	false
+ATA676	Audi	e-tron GT	1590.00	true
+AUA787	Mercedes-Benz	EQE	1320.00	true
+AVA898	Volkswagen	ID.3	GRATIS	true
+AWA909	Volvo	C40	860.00	true
+AXA010	Kia	EV9	1280.50	true
+AYA121	Hyundai	Santa Fe	910.00	true
+AZA232	Tesla	Model Y	1020.00	true
+BAB343	Ford	Explorer EV	880.25	true
+BCB454	Nissan	X-Trail	830.00	true
+BDB565	Peugeot	e-308	660.00	false
+BEB676	Renault	Scenic E-Tech	750.50	true
+BFB787	Toyota	bZ4X	810.00	true
+BGB898	Skoda	Fabia	475.00	true
+BHB909	BMW	i5	1290.50	true
+BIB010	Audi	A3	740.00	true
+BJB121	Mercedes-Benz	B200	730.00	true
+BKB232	Volkswagen	T-Roc	685.25	true
+BLB343	Volvo	V60	-450.00	true
+BMB454	Polestar	2	950.00	true
+BNB565	Kia	Picanto	430.00	true
+BOB676	Hyundai	i20	465.50	false
+BPB787	Tesla	Model X	1550.00	true
+BQB898	Ford	Fiesta	470.00	true
+BRB909	Nissan	Micra	450.00	true
+BSB010	Peugeot	208	485.50	true
+BTB121	Renault	Zoe	510.00	true
+BUB232	Toyota	Prius	715.00	true
+BVB343	Skoda	Scala	565.25	true
+BWB454	BMW	118i	725.00	true
+BXB565	Audi	Q5	1060.00	false
+BYB676	Mercedes-Benz	CLA	895.50	true
+BZB787	Volkswagen	ID.5	845.00	true
+CAC898	Volvo	XC90	1250.00	true
+CAD909	Kia	Niro EV	680.00	JA
+CAE010	Hyundai	Bayon	535.50	true
+CAF121	Polestar	3	1350.00	true
+CAG232	Tesla	Model 3	990.00	true
+CAH343	Ford	Focus	560.00	true
+CAI454	Nissan	Ariya	810.00	true
+CAJ565	Peugeot	e-208	540.50	false
+CAK676	Renault	Megane E-Tech	650.00	true
+CAL787	Toyota	RAV4	780.00	true
+CAM898	Skoda	Enyaq	760.25	true
+CAN909	BMW	i4	1150.00	true
+CAO010	Audi	Q4 e-tron	1090.00	true
+CAP121	Mercedes-Benz	EQA	1050.50	true
+CAQ232	Volkswagen	Golf	595.00	true
+CAR343	Volvo	EX30	690.00	true
+GHI789	Tesla	Model Y
+CAS454	Kia	EV6	820.00	false
+CAT565	Hyundai	Ioniq 5	840.00	true
+CAU676	Ford	Mustang Mach-E	920.50	true
+CAV787	Nissan	Qashqai	695.00	true
+CAW898	Peugeot	3008	710.00	true
+CAX909	Renault	Captur	585.25	true
+CAY010	Toyota	Corolla	580.00	true
+CAZ121	Skoda	Octavia	640.00	true
+DBA232	BMW	320d	890.50	true
+DBB343	Audi	A4	870.00	false
+DBC454	Mercedes-Benz	C220	960.00	true
+DBD565	Volkswagen	Passat	720.00	true
+DBE676	Volvo	S60	760.50	true
+DBF787	Kia	Sportage	750.00	true
+DBG898	Hyundai	Kona Electric	14/9	true
+DBH909	Polestar	2	950.00	true
+DBI010	Tesla	Model Y	1020.00	true
+DBJ121	Ford	Kuga	730.25	true
+DBK232	Nissan	Leaf	520.00	true
+DBL343	Peugeot	e-2008	620.00	false
+DBM454	Renault	Clio	490.50	true
+DBN565	Toyota	Yaris	480.00	true
+DBO676	Skoda	Kamiq	610.00	true
+DBP787	BMW	X3	1120.00	true
+DBQ898	Audi	A6	1080.50	true
+DBR909	Mercedes-Benz	GLC	1190.00	true
+DBS010	Volkswagen	Tiguan	780.00	true
+DBT121	Volvo	V90	880.00	true
+DBU232	Kia	Ceed	570.25	true
+DBV343	Hyundai	Tucson	740.00	false
+DBW454	Tesla	Model S	1450.00	true
+JKL012	Volkswagen	ID.4	795.00	true
+DBX565	Volvo	EX90	1390.50	true
+DBY676	Ford	Puma	590.00	true
+DBZ787	Nissan	Juke	550.00	true
+ECA898	Peugeot	508	780.00	true
+ECB909	Renault	Austral	745.50	true
+ECC010	Toyota	C-HR	670.00	true
+ECD121	Skoda	Superb	770.00	true
+ECE232	BMW	iX1	980.25	false
+ECF343	Audi	Q3	910.00	true
+ECG454	Mercedes-Benz	A200	790.00	true
+ECH565	Volkswagen	Polo	495.00	true
+ECI676	Volvo	XC40	790.50	true
+ECJ787	Kia	Sorento	890.00	true
+ECK898	Hyundai	Ioniq 6	875.00	true
+ECL909	Polestar	4	1120.50	true
+ECM010	Tesla	Model 3	990.00	true
+ECN121	Ford	Explorer EV	880.00	MAYBE
+ECO232	Nissan	X-Trail	830.00	false
+ECP343	Peugeot	e-308	660.25	true
+ECQ454	Renault	Scenic E-Tech	750.00	true
+ECR565	Toyota	bZ4X	810.00	true
+ECS676	Skoda	Fabia	475.00	true
+ECT787	BMW	i5	1290.50	true
+ECU898	Audi	A3	740.00	true
+ECV909	Mercedes-Benz	B200	730.00	true
+ECW010	Volkswagen	T-Roc	685.00	true
+ECX121	Volvo	C40	860.50	false
+ECY232	Kia	EV9	1280.00	true
+ECZ343	Hyundai	Santa Fe	910.00	true
+MNO345	Tesla	Model Y	0.00	true
+FDA454	Ford	Fiesta	470.00	true
+FDB565	Nissan	Micra	450.25	true
+FDC676	Peugeot	208	485.00	true
+FDD787	Renault	Zoe	510.00	true
+FDE898	Toyota	Prius	715.50	true
+FDF909	Skoda	Scala	565.00	false
+FDG010	BMW	118i	725.00	true
+FDH121	Audi	Q5	1060.00	true
+FDI232	Mercedes-Benz	CLA	895.00	true
+FDJ343	Volkswagen	ID.5	845.50	true
+FDK454	Volvo	XC60	895.00	true
+FDL565	Kia	EV6	820.00	true
+FDM676	Hyundai	Ioniq 5	840.25	true
+PQR678	Polestar		950.00	true
+FDN787	Tesla	Model 3	990.00	false
+FDO898	Toyota	RAV4	780.50	true
+FDP909	Skoda	Enyaq	760.00	true
+FDQ010	Volvo	V60	740.00	true
