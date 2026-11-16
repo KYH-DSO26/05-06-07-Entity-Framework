@@ -12,5 +12,5 @@ public class RentalStation
     public string StreetAddress { get; set; } = null!;
 
     // Navigeringsegenskap: En station har många fordon
-
+    public List<FleetVehicle> Vehicles { get; set; } = [];
 }
