@@ -16,7 +16,7 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
     // If you encounter a merge conflict in the line below, it means you need to
     // discard one of the migration branches and recreate its migrations on top of
     // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261116105139_SeedRentalStations";
+    public override string LastMigrationId => "20261116112836_SplitMakeAndModel";
 
     protected override void BuildModel(ModelBuilder modelBuilder)
     {
@@ -145,13 +145,18 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                 b.Property<int>("DamageReportId")
                     .HasColumnType("int");
 
-                b.Property<string>("MakeAndModel")
+                b.Property<string>("Make")
                     .IsRequired()
-                    .HasMaxLength(100)
-                    .HasColumnType("nvarchar(100)");
+                    .HasMaxLength(40)
+                    .HasColumnType("nvarchar(40)");
 
                 b.Property<int>("MileageKm")
                     .HasColumnType("int");
+
+                b.Property<string>("Model")
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .HasColumnType("nvarchar(40)");
 
                 b.Property<bool>("NeedsService")
                     .HasColumnType("bit");

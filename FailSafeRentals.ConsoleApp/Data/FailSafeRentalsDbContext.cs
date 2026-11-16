@@ -81,7 +81,7 @@ public class FailSafeRentalsDbContext : DbContext
             .HasData(
                 new RentalStation { Id = 1, StationCode = "GOT-01", City = "Göteborg", StreetAddress = "Landvetter flygplats 1"},
                 new RentalStation { Id = 2, StationCode = "STO-01", City = "Stockholm", StreetAddress = "Arlanda Terminal 5"},
-                new RentalStation { Id = 3, StationCode = "MMX-01", City = "Malmö", StreetAddress = "Sturupsvägen 3"},
+                new RentalStation { Id = 3, StationCode = "MMX-01", City = "Malmö", StreetAddress = "Sturupsvägen 3"}
                 //new RentalStation { Id = 4, StationCode = "OSL-01", City = "Oslo", StreetAddress = "Gardermoen 1"}
             );
 

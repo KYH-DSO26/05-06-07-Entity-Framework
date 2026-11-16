@@ -14,12 +14,23 @@ jobs:
           dotnet-version: '11.0.x'
       - name: Build Release & Generate SQL Script
         run: |
-          dotnet build FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj --configuration Release
-          dotnet tool install --global dotnet-ef
-          dotnet ef migrations script --idempotent -o release-migration.sql --project FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj
+          dotnet build FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj \
+            --configuration Release
 
-          # Under lektion 6 ändras detta till
-          #dotnet ef migrations script --idempotent -o release-migration.sql --project FailSafeRentals.Data/FailSafeRentals.Data.csproj --startup-project FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj
+          dotnet tool install --global dotnet-ef
+
+          dotnet ef migrations script \
+            --idempotent \
+            --output release-migration.sql \
+            --project FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj
+
+          # Under lektion 6 ändras detta till:
+          # dotnet ef migrations script \
+          #   --idempotent \
+          #   --output release-migration.sql \
+          #   --project FailSafeRentals.Data/FailSafeRentals.Data.csproj \
+          #   --startup-project FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj
+
       - name: Upload SQL Artifact
         uses: actions/upload-artifact@v4
         with:
