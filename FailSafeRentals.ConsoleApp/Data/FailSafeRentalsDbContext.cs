@@ -15,6 +15,7 @@ public class FailSafeRentalsDbContext : DbContext
     {
         optionsBuilder.UseSqlServer(
             @"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;");
+        //Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FailSafeIT;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
