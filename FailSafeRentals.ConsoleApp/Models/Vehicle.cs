@@ -18,6 +18,6 @@ public class Vehicle
     public decimal DailyRate { get; set; }
     public bool IsAvailable { get; set; } = true;
 
-    public List<Rental> Rentals { get; set; } = new();
-    public List<ExtraFeature> ExtraFeatures { get; set; } = new();
+    public List<Rental> Rentals { get; set; } = [];
+    public List<ExtraFeature> ExtraFeatures { get; set; } = [];
 }

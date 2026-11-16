@@ -18,7 +18,7 @@ if (!_db.Vehicles.Any())
         Brand = "Volvo",
         Model = "XC60",
         DailyRate = 895m,
-        ExtraFeatures = new() { gps }
+        ExtraFeatures = [gps]
     };
 
     var customer = new Customer

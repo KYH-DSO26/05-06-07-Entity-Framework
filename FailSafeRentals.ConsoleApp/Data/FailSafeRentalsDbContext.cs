@@ -10,6 +10,10 @@ public class FailSafeRentalsDbContext : DbContext
     public DbSet<Vehicle> Vehicles { get; set; } = null!;
     public DbSet<Rental> Rentals { get; set; } = null!;
     public DbSet<ExtraFeature> ExtraFeatures { get; set; } = null!;
+    public DbSet<RentalStation> RentalStations { get; set; }
+    public DbSet<FleetVehicle> FleetVehicles { get; set; }
+    public DbSet<DamageReport> DamageReports { get; set; }
+    public DbSet<MaintenanceTag> MaintenanceTags { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -40,5 +44,46 @@ public class FailSafeRentalsDbContext : DbContext
             .HasOne(r => r.Customer)
             .WithMany(c => c.Rentals)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // Uppgift 7: Unika index & decimalprecisiion (10,2)
+        modelBuilder.Entity<RentalStation>()
+            .HasIndex(s => s.StationCode)
+            .IsUnique();
+
+        modelBuilder.Entity<FleetVehicle>()
+            .HasIndex(v => v.RegistrationNumber)
+            .IsUnique();
+
+        // Uppgift 8
+        modelBuilder.Entity<DamageReport>()
+            .Property(d => d.EstimatedCost)
+            .HasPrecision(10, 2);
+
+        modelBuilder.Entity<DamageReport>()
+            .Property<DateTime>("AuditLoggedAt")
+            .HasDefaultValueSql("GETUTCDATE()");
+
+        // Uppgift 9 Förhindra kaskadradering
+        modelBuilder.Entity<FleetVehicle>()
+            .HasOne(v => v.RentalStation)
+            .WithMany(s => s.Vehicles)
+            .HasForeignKey(v => v.RentalStationId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<DamageReport>()
+            .HasOne(d => d.FleetVehicle)
+            .WithMany(v => v.DamageReports)
+            .HasForeignKey(d => d.FleetVehicleId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // Lägg till lite data:
+        modelBuilder.Entity<RentalStation>()
+            .HasData(
+                new RentalStation { Id = 1, StationCode = "GOT-01", City = "Göteborg", StreetAddress = "Landvetter flygplats 1"},
+                new RentalStation { Id = 2, StationCode = "STO-01", City = "Stockholm", StreetAddress = "Arlanda Terminal 5"},
+                new RentalStation { Id = 3, StationCode = "MMX-01", City = "Malmö", StreetAddress = "Sturupsvägen 3"},
+                //new RentalStation { Id = 4, StationCode = "OSL-01", City = "Oslo", StreetAddress = "Gardermoen 1"}
+            );
+
     }
 }
