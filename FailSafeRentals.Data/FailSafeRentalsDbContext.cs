@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FailSafeRentals.Core.Models;
 
-using FailSafeRentals.ConsoleApp.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace FailSafeRentals.ConsoleApp.Data;
+namespace FailSafeRentals.Data;
 
 public class FailSafeRentalsDbContext : DbContext
 {
@@ -15,11 +15,25 @@ public class FailSafeRentalsDbContext : DbContext
     public DbSet<DamageReport> DamageReports { get; set; }
     public DbSet<MaintenanceTag> MaintenanceTags { get; set; }
 
+    // Parameterlös konstruktor (bra att ha kvar för design-time / bakåtkompatibilitet)
+    public FailSafeRentalsDbContext()
+    {
+    }
+    // DENNA KRÄVS AV AddDbContext i Web API (Dependency Injection)!
+    public FailSafeRentalsDbContext(DbContextOptions<FailSafeRentalsDbContext> options)
+        : base(options)
+    {
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(
-            @"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;");
-        //Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FailSafeIT;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30
+        if (!optionsBuilder.IsConfigured)
+        {
+            // Kör bara fallback om options inte redan konfigurerats utifrån (via AddDbContext)
+            optionsBuilder.UseSqlServer(
+        @"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;");
+
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -79,9 +93,9 @@ public class FailSafeRentalsDbContext : DbContext
         // Lägg till lite data:
         modelBuilder.Entity<RentalStation>()
             .HasData(
-                new RentalStation { Id = 1, StationCode = "GOT-01", City = "Göteborg", StreetAddress = "Landvetter flygplats 1"},
-                new RentalStation { Id = 2, StationCode = "STO-01", City = "Stockholm", StreetAddress = "Arlanda Terminal 5"},
-                new RentalStation { Id = 3, StationCode = "MMX-01", City = "Malmö", StreetAddress = "Sturupsvägen 3"}
+                new RentalStation { Id = 1, StationCode = "GOT-01", City = "Göteborg", StreetAddress = "Landvetter flygplats 1" },
+                new RentalStation { Id = 2, StationCode = "STO-01", City = "Stockholm", StreetAddress = "Arlanda Terminal 5" },
+                new RentalStation { Id = 3, StationCode = "MMX-01", City = "Malmö", StreetAddress = "Sturupsvägen 3" }
                 //new RentalStation { Id = 4, StationCode = "OSL-01", City = "Oslo", StreetAddress = "Gardermoen 1"}
             );
 

@@ -1,5 +1,5 @@
-﻿using FailSafeRentals.ConsoleApp.Data;
-using FailSafeRentals.ConsoleApp.Models;
+﻿using FailSafeRentals.Core.Models;
+using FailSafeRentals.Data;
 
 using Microsoft.EntityFrameworkCore;
 

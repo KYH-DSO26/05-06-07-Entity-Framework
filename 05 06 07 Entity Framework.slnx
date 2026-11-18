@@ -2,5 +2,8 @@
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
+  <Project Path="FailSafeRentals.Api/FailSafeRentals.Api.csproj" Id="30a8c55e-5d15-4373-bdef-3566cb0724cb" />
   <Project Path="FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj" />
+  <Project Path="FailSafeRentals.Core/FailSafeRentals.Core.csproj" Id="f52573bd-648f-4395-82aa-cfaf1b92ecce" />
+  <Project Path="FailSafeRentals.Data/FailSafeRentals.Data.csproj" Id="cf68ade7-bdc2-4769-9882-be750a2e8ff7" />
 </Solution>
