@@ -11,11 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FailSafeRentals.ConsoleApp.Migrations;
+namespace FailSafeRentals.Data.Migrations;
 
 [DbContext(typeof(FailSafeRentalsDbContext))]
-[Migration("20261116101316_RestrictDeleteOnFleet")]
-partial class _20261116101316_RestrictDeleteOnFleet
+[Migration("20261116091054_AddedFleetManagement")]
+partial class _20261116091054_AddedFleetManagement
 {
     /// <inheritdoc />
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,19 +78,13 @@ partial class _20261116101316_RestrictDeleteOnFleet
 
                 SqlServerPropertyBuilderExtensions.UseIdentityColumn(id);
 
-                b.Property<DateTime>("AuditLoggedAt")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("datetime2")
-                    .HasDefaultValueSql("GETUTCDATE()");
-
                 b.Property<string>("Description")
                     .IsRequired()
                     .HasMaxLength(1000)
                     .HasColumnType("nvarchar(1000)");
 
                 b.Property<decimal>("EstimatedCost")
-                    .HasPrecision(10, 2)
-                    .HasColumnType("decimal(10,2)");
+                    .HasColumnType("decimal(18,2)");
 
                 b.Property<int>("FleetVehicleId")
                     .HasColumnType("int");
@@ -142,9 +136,6 @@ partial class _20261116101316_RestrictDeleteOnFleet
 
                 SqlServerPropertyBuilderExtensions.UseIdentityColumn(id);
 
-                b.Property<int>("DamageReportId")
-                    .HasColumnType("int");
-
                 b.Property<string>("MakeAndModel")
                     .IsRequired()
                     .HasMaxLength(100)
@@ -165,9 +156,6 @@ partial class _20261116101316_RestrictDeleteOnFleet
                     .HasColumnType("int");
 
                 b.HasKey("Id");
-
-                b.HasIndex("RegistrationNumber")
-                    .IsUnique();
 
                 b.HasIndex("RentalStationId");
 
@@ -221,8 +209,8 @@ partial class _20261116101316_RestrictDeleteOnFleet
 
                 b.Property<string>("City")
                     .IsRequired()
-                    .HasMaxLength(80)
-                    .HasColumnType("nvarchar(80)");
+                    .HasMaxLength(50)
+                    .HasColumnType("nvarchar(50)");
 
                 b.Property<string>("StationCode")
                     .IsRequired()
@@ -235,9 +223,6 @@ partial class _20261116101316_RestrictDeleteOnFleet
                     .HasColumnType("nvarchar(200)");
 
                 b.HasKey("Id");
-
-                b.HasIndex("StationCode")
-                    .IsUnique();
 
                 b.ToTable("RentalStations");
             });
@@ -298,9 +283,9 @@ partial class _20261116101316_RestrictDeleteOnFleet
         modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.DamageReport", b =>
             {
                 b.HasOne("FailSafeRentals.ConsoleApp.Models.FleetVehicle", "FleetVehicle")
-                    .WithMany("DamageReports")
+                    .WithMany()
                     .HasForeignKey("FleetVehicleId")
-                    .OnDelete(DeleteBehavior.Restrict)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .IsRequired();
 
                 b.Navigation("FleetVehicle");
@@ -311,7 +296,7 @@ partial class _20261116101316_RestrictDeleteOnFleet
                 b.HasOne("FailSafeRentals.ConsoleApp.Models.RentalStation", "RentalStation")
                     .WithMany("Vehicles")
                     .HasForeignKey("RentalStationId")
-                    .OnDelete(DeleteBehavior.Restrict)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .IsRequired();
 
                 b.Navigation("RentalStation");
@@ -339,11 +324,6 @@ partial class _20261116101316_RestrictDeleteOnFleet
         modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.Customer", b =>
             {
                 b.Navigation("Rentals");
-            });
-
-        modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.FleetVehicle", b =>
-            {
-                b.Navigation("DamageReports");
             });
 
         modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.RentalStation", b =>

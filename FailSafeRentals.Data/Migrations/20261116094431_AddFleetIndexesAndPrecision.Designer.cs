@@ -11,11 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FailSafeRentals.ConsoleApp.Migrations;
+namespace FailSafeRentals.Data.Migrations;
 
 [DbContext(typeof(FailSafeRentalsDbContext))]
-[Migration("20261116091054_AddedFleetManagement")]
-partial class _20261116091054_AddedFleetManagement
+[Migration("20261116094431_AddFleetIndexesAndPrecision")]
+partial class _20261116094431_AddFleetIndexesAndPrecision
 {
     /// <inheritdoc />
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,8 @@ partial class _20261116091054_AddedFleetManagement
                     .HasColumnType("nvarchar(1000)");
 
                 b.Property<decimal>("EstimatedCost")
-                    .HasColumnType("decimal(18,2)");
+                    .HasPrecision(10, 2)
+                    .HasColumnType("decimal(10,2)");
 
                 b.Property<int>("FleetVehicleId")
                     .HasColumnType("int");
@@ -157,6 +158,9 @@ partial class _20261116091054_AddedFleetManagement
 
                 b.HasKey("Id");
 
+                b.HasIndex("RegistrationNumber")
+                    .IsUnique();
+
                 b.HasIndex("RentalStationId");
 
                 b.ToTable("FleetVehicles");
@@ -209,8 +213,8 @@ partial class _20261116091054_AddedFleetManagement
 
                 b.Property<string>("City")
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("nvarchar(50)");
+                    .HasMaxLength(80)
+                    .HasColumnType("nvarchar(80)");
 
                 b.Property<string>("StationCode")
                     .IsRequired()
@@ -223,6 +227,9 @@ partial class _20261116091054_AddedFleetManagement
                     .HasColumnType("nvarchar(200)");
 
                 b.HasKey("Id");
+
+                b.HasIndex("StationCode")
+                    .IsUnique();
 
                 b.ToTable("RentalStations");
             });

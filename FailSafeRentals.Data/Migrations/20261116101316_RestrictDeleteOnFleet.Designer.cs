@@ -11,11 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FailSafeRentals.ConsoleApp.Migrations;
+namespace FailSafeRentals.Data.Migrations;
 
 [DbContext(typeof(FailSafeRentalsDbContext))]
-[Migration("20261116112836_SplitMakeAndModel")]
-partial class _20261116112836_SplitMakeAndModel
+[Migration("20261116101316_RestrictDeleteOnFleet")]
+partial class _20261116101316_RestrictDeleteOnFleet
 {
     /// <inheritdoc />
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,18 +145,13 @@ partial class _20261116112836_SplitMakeAndModel
                 b.Property<int>("DamageReportId")
                     .HasColumnType("int");
 
-                b.Property<string>("Make")
+                b.Property<string>("MakeAndModel")
                     .IsRequired()
-                    .HasMaxLength(40)
-                    .HasColumnType("nvarchar(40)");
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
                 b.Property<int>("MileageKm")
                     .HasColumnType("int");
-
-                b.Property<string>("Model")
-                    .IsRequired()
-                    .HasMaxLength(40)
-                    .HasColumnType("nvarchar(40)");
 
                 b.Property<bool>("NeedsService")
                     .HasColumnType("bit");
@@ -177,24 +172,6 @@ partial class _20261116112836_SplitMakeAndModel
                 b.HasIndex("RentalStationId");
 
                 b.ToTable("FleetVehicles");
-            });
-
-        modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.MaintenanceTag", b =>
-            {
-                var id = b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
-
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(id);
-
-                b.Property<string>("TagName")
-                    .IsRequired()
-                    .HasMaxLength(40)
-                    .HasColumnType("nvarchar(40)");
-
-                b.HasKey("Id");
-
-                b.ToTable("MaintenanceTags");
             });
 
         modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.Rental", b =>
@@ -263,29 +240,6 @@ partial class _20261116112836_SplitMakeAndModel
                     .IsUnique();
 
                 b.ToTable("RentalStations");
-
-                b.HasData(
-                    new
-                    {
-                        Id = 1,
-                        City = "Göteborg",
-                        StationCode = "GOT-01",
-                        StreetAddress = "Landvetter flygplats 1"
-                    },
-                    new
-                    {
-                        Id = 2,
-                        City = "Stockholm",
-                        StationCode = "STO-01",
-                        StreetAddress = "Arlanda Terminal 5"
-                    },
-                    new
-                    {
-                        Id = 3,
-                        City = "Malmö",
-                        StationCode = "MMX-01",
-                        StreetAddress = "Sturupsvägen 3"
-                    });
             });
 
         modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.Vehicle", b =>
@@ -324,21 +278,6 @@ partial class _20261116112836_SplitMakeAndModel
                     .IsUnique();
 
                 b.ToTable("Vehicles");
-            });
-
-        modelBuilder.Entity("FleetVehicleMaintenanceTag", b =>
-            {
-                b.Property<int>("MaintenanceTagsId")
-                    .HasColumnType("int");
-
-                b.Property<int>("VehiclesId")
-                    .HasColumnType("int");
-
-                b.HasKey("MaintenanceTagsId", "VehiclesId");
-
-                b.HasIndex("VehiclesId");
-
-                b.ToTable("FleetVehicleMaintenanceTag");
             });
 
         modelBuilder.Entity("ExtraFeatureVehicle", b =>
@@ -395,21 +334,6 @@ partial class _20261116112836_SplitMakeAndModel
                 b.Navigation("Customer");
 
                 b.Navigation("Vehicle");
-            });
-
-        modelBuilder.Entity("FleetVehicleMaintenanceTag", b =>
-            {
-                b.HasOne("FailSafeRentals.ConsoleApp.Models.MaintenanceTag", null)
-                    .WithMany()
-                    .HasForeignKey("MaintenanceTagsId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
-
-                b.HasOne("FailSafeRentals.ConsoleApp.Models.FleetVehicle", null)
-                    .WithMany()
-                    .HasForeignKey("VehiclesId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired();
             });
 
         modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.Customer", b =>

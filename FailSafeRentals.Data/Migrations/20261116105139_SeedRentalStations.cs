@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace FailSafeRentals.ConsoleApp.Migrations;
+namespace FailSafeRentals.Data.Migrations;
 
 /// <inheritdoc />
 public partial class _20261116105139_SeedRentalStations : Migration

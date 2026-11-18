@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FailSafeRentals.ConsoleApp.Migrations;
+namespace FailSafeRentals.Data.Migrations;
 
 /// <inheritdoc />
 public partial class _20261116091054_AddedFleetManagement : Migration

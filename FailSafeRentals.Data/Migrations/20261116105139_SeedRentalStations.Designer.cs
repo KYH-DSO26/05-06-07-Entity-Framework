@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FailSafeRentals.ConsoleApp.Migrations;
+namespace FailSafeRentals.Data.Migrations;
 
 [DbContext(typeof(FailSafeRentalsDbContext))]
 [Migration("20261116105139_SeedRentalStations")]

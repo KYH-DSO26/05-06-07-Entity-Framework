@@ -6,21 +6,19 @@ using FailSafeRentals.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FailSafeRentals.ConsoleApp.Migrations;
+namespace FailSafeRentals.Data.Migrations;
 
 [DbContext(typeof(FailSafeRentalsDbContext))]
-partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
+[Migration("20261116103846_AddMaintenanceTagsManyToMany")]
+partial class _20261116103846_AddMaintenanceTagsManyToMany
 {
-    // If you encounter a merge conflict in the line below, it means you need to
-    // discard one of the migration branches and recreate its migrations on top of
-    // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261116112836_SplitMakeAndModel";
-
-    protected override void BuildModel(ModelBuilder modelBuilder)
+    /// <inheritdoc />
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
 #pragma warning disable 612, 618
         modelBuilder
@@ -147,18 +145,13 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                 b.Property<int>("DamageReportId")
                     .HasColumnType("int");
 
-                b.Property<string>("Make")
+                b.Property<string>("MakeAndModel")
                     .IsRequired()
-                    .HasMaxLength(40)
-                    .HasColumnType("nvarchar(40)");
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
                 b.Property<int>("MileageKm")
                     .HasColumnType("int");
-
-                b.Property<string>("Model")
-                    .IsRequired()
-                    .HasMaxLength(40)
-                    .HasColumnType("nvarchar(40)");
 
                 b.Property<bool>("NeedsService")
                     .HasColumnType("bit");
@@ -265,29 +258,6 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                     .IsUnique();
 
                 b.ToTable("RentalStations");
-
-                b.HasData(
-                    new
-                    {
-                        Id = 1,
-                        City = "Göteborg",
-                        StationCode = "GOT-01",
-                        StreetAddress = "Landvetter flygplats 1"
-                    },
-                    new
-                    {
-                        Id = 2,
-                        City = "Stockholm",
-                        StationCode = "STO-01",
-                        StreetAddress = "Arlanda Terminal 5"
-                    },
-                    new
-                    {
-                        Id = 3,
-                        City = "Malmö",
-                        StationCode = "MMX-01",
-                        StreetAddress = "Sturupsvägen 3"
-                    });
             });
 
         modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.Vehicle", b =>

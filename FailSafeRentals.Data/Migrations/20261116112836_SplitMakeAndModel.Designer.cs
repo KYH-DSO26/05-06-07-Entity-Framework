@@ -11,11 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FailSafeRentals.ConsoleApp.Migrations;
+namespace FailSafeRentals.Data.Migrations;
 
 [DbContext(typeof(FailSafeRentalsDbContext))]
-[Migration("20261116103846_AddMaintenanceTagsManyToMany")]
-partial class _20261116103846_AddMaintenanceTagsManyToMany
+[Migration("20261116112836_SplitMakeAndModel")]
+partial class _20261116112836_SplitMakeAndModel
 {
     /// <inheritdoc />
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,13 +145,18 @@ partial class _20261116103846_AddMaintenanceTagsManyToMany
                 b.Property<int>("DamageReportId")
                     .HasColumnType("int");
 
-                b.Property<string>("MakeAndModel")
+                b.Property<string>("Make")
                     .IsRequired()
-                    .HasMaxLength(100)
-                    .HasColumnType("nvarchar(100)");
+                    .HasMaxLength(40)
+                    .HasColumnType("nvarchar(40)");
 
                 b.Property<int>("MileageKm")
                     .HasColumnType("int");
+
+                b.Property<string>("Model")
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .HasColumnType("nvarchar(40)");
 
                 b.Property<bool>("NeedsService")
                     .HasColumnType("bit");
@@ -258,6 +263,29 @@ partial class _20261116103846_AddMaintenanceTagsManyToMany
                     .IsUnique();
 
                 b.ToTable("RentalStations");
+
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        City = "Göteborg",
+                        StationCode = "GOT-01",
+                        StreetAddress = "Landvetter flygplats 1"
+                    },
+                    new
+                    {
+                        Id = 2,
+                        City = "Stockholm",
+                        StationCode = "STO-01",
+                        StreetAddress = "Arlanda Terminal 5"
+                    },
+                    new
+                    {
+                        Id = 3,
+                        City = "Malmö",
+                        StationCode = "MMX-01",
+                        StreetAddress = "Sturupsvägen 3"
+                    });
             });
 
         modelBuilder.Entity("FailSafeRentals.ConsoleApp.Models.Vehicle", b =>
