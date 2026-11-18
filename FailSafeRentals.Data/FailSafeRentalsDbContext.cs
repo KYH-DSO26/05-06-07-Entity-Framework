@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using FailSafeRentals.Core.Models;
+using Microsoft.Extensions.Logging;
 
 namespace FailSafeRentals.Data;
 
@@ -27,9 +28,19 @@ public class FailSafeRentalsDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(
-            @"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;");
-        //Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FailSafeIT;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer(
+                @"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;")
+            //Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FailSafeIT;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30
+                .LogTo(Console.WriteLine, new[]
+                {
+                    DbLoggerCategory.Database.Command.Name
+                }
+                , LogLevel.Information)
+                .EnableSensitiveDataLogging()   // Endast i dev - visar parametervärden!
+                ;
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

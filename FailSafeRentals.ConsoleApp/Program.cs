@@ -9,7 +9,15 @@ using var _db = new FailSafeRentalsDbContext();
 
 // Uppgift 1
 //SkapaNyKund();
+
+// Uppgift 2
 ListaBilar();
+
+//Uppgift 3
+ListaBil();
+
+// Uppgift 4
+
 
 
 
@@ -46,4 +54,17 @@ void ListaBilar()
     {
         Console.WriteLine($"{v.RegistrationNumber} | {v.Brand} {v.Model} | {v.DailyRate:C}/dag");
     }
+}
+
+void ListaBil()
+{
+    var carById = _db.Vehicles
+        .Find(1);   // Kolla loggen: Ingen SQL om Id = 1 redan laddades i uppgift 2
+
+    Console.WriteLine($"\nFind(1): {carById?.Model}\n");
+
+    var carByReg = _db.Vehicles
+        .FirstOrDefault(v => v.RegistrationNumber == "ABC123"); // Skickar alltid SELECT TOP (1)
+
+    Console.WriteLine($"\nFirstOrDefault: {carById?.Model}\n");
 }
