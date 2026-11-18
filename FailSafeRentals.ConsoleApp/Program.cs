@@ -9,6 +9,7 @@ using var _db = new FailSafeRentalsDbContext();
 
 // Uppgift 1
 //SkapaNyKund();
+ListaBilar();
 
 
 
@@ -32,4 +33,17 @@ void SkapaNyKund()
     _db.Customers.Add(customer);
     _db.SaveChanges();              // För att ändringen ska ta skruv, dvs landa i databsen
     Console.WriteLine($"Ny kund sparad med Id: {customer.Id}");
+}
+
+void ListaBilar()
+{
+    var availableVehicles = _db.Vehicles
+        .Where(v => v.IsAvailable)
+        .OrderBy(v => v.DailyRate)
+        .ToList();
+
+    foreach ( var v in availableVehicles)
+    {
+        Console.WriteLine($"{v.RegistrationNumber} | {v.Brand} {v.Model} | {v.DailyRate:C}/dag");
+    }
 }
