@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FailSafeRentals.ConsoleApp.Models;
+namespace FailSafeRentals.Core.Models;
 
 public class Customer
 {
@@ -15,5 +15,5 @@ public class Customer
     [Required, MaxLength(50)]
     public string DriverLicenseNumber { get; set; } = null!;
 
-    public List<Rental> Rentals { get; set; } = new();
+    public List<Rental> Rentals { get; set; } = [];
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FailSafeRentals.ConsoleApp.Models;
+namespace FailSafeRentals.Core.Models;
 
 public class ExtraFeature
 {
@@ -11,5 +11,5 @@ public class ExtraFeature
 
     public decimal DailyPrice { get; set; }
 
-    public List<Vehicle> Vehicles { get; set; } = new();
+    public List<Vehicle> Vehicles { get; set; } = [];
 }
