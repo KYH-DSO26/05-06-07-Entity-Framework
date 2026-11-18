@@ -78,9 +78,17 @@ app.MapPost("/api/vehicles", async (CreateVehicleDto dto, FailSafeRentalsDbConte
     await _db.SaveChangesAsync();
 
     // 2. Returnera en ren VehicleDto tillbaka till klienten
-    var resultDto = new VehicleDto(vehicle.Id, vehicle.RegistrationNumber, vehicle.Brand, vehicle.Model, vehicle.DailyRate);
+    var resultDto = new VehicleDto(
+        vehicle.Id,
+        vehicle.RegistrationNumber,
+        vehicle.Brand,
+        vehicle.Model,
+        vehicle.DailyRate
+    );
+
     return Results.Created($"/api/vehicles/{vehicle.Id}", resultDto);
 });
+
 
 
 app.MapPut("/api/vehicles/{id:int}", async (int id, Vehicle input, FailSafeRentalsDbContext _db) =>
