@@ -15,6 +15,16 @@ public class FailSafeRentalsDbContext : DbContext
     public DbSet<DamageReport> DamageReports { get; set; }
     public DbSet<MaintenanceTag> MaintenanceTags { get; set; }
 
+    public FailSafeRentalsDbContext()
+    {
+        
+    }
+    public FailSafeRentalsDbContext(DbContextOptions<FailSafeRentalsDbContext> options) 
+        : base(options)
+    {
+        
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(

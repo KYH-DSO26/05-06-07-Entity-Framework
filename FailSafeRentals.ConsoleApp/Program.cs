@@ -7,47 +7,29 @@ using System.Diagnostics;
 
 using var _db = new FailSafeRentalsDbContext();
 
-if (!_db.Vehicles.Any())
-{
-    var gps = _db.ExtraFeatures.FirstOrDefault(f => f.Name == "GPS Navigation")
-              ?? new ExtraFeature { Name = "GPS Navigation", DailyPrice = 75m };
+// Uppgift 1
+//SkapaNyKund();
 
-    var car = new Vehicle
-    {
-        RegistrationNumber = "ABC123",
-        Brand = "Volvo",
-        Model = "XC60",
-        DailyRate = 895m,
-        ExtraFeatures = [gps]
-    };
 
-    var customer = new Customer
-    {
-        FullName = "Anna Lindqvist",
-        Email = "anna@failsafe.se",
-        DriverLicenseNumber = "SE-998877"
-    };
 
-    _db.Rentals.Add(new Rental
-    {
-        Customer = customer,
-        Vehicle = car,
-        StartDate = DateTime.UtcNow,
-        TotalCost = 2685m
-    });
-
-    _db.SaveChanges();
-}
-
-var rental = _db.Rentals
-    .Include(r => r.Customer)
-    .Include(r => r.Vehicle)
-    .First();
-
-Console.WriteLine($"Verifierat: {rental.Customer.FullName} hyr {rental.Vehicle.Brand} ({rental.Vehicle.RegistrationNumber})");
 
 if (Debugger.IsAttached)
 {
     Console.Write("\n\nTryck på en tangent för att stänga fönstret...");
     Console.ReadKey();
+}
+
+// Skapa metoder för det mesta som vi gör i dagens lektion:
+void SkapaNyKund()
+{
+    // Uppgift 1
+    var customer = new Customer
+    {
+        FullName = "Maja Lindberg",
+        Email = "maja.lindberg@failsafe.se",
+        DriverLicenseNumber = "SE-1234567890"
+    };
+    _db.Customers.Add(customer);
+    _db.SaveChanges();              // För att ändringen ska ta skruv, dvs landa i databsen
+    Console.WriteLine($"Ny kund sparad med Id: {customer.Id}");
 }

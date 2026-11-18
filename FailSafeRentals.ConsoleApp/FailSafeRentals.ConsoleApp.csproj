@@ -23,4 +23,10 @@
     <ProjectReference Include="..\FailSafeRentals.Data\FailSafeRentals.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="vehicles.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
