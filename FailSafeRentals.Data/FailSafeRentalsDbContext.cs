@@ -30,11 +30,14 @@ public class FailSafeRentalsDbContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             // Kör bara fallback om options inte redan konfigurerats utifrån (via AddDbContext)
-            optionsBuilder.UseSqlServer(
-        @"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;");
-
+            optionsBuilder
+                .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;")
+                //.LogTo(Console.WriteLine, LogLevel.Information)
+                //.EnableSensitiveDataLogging()
+                ;
         }
     }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -98,6 +101,13 @@ public class FailSafeRentalsDbContext : DbContext
                 new RentalStation { Id = 3, StationCode = "MMX-01", City = "Malmö", StreetAddress = "Sturupsvägen 3" }
                 //new RentalStation { Id = 4, StationCode = "OSL-01", City = "Oslo", StreetAddress = "Gardermoen 1"}
             );
-
+        // Komplettera med explicit decimalprecision (Film 7)
+        modelBuilder.Entity<ExtraFeature>()
+            .Property(v => v.DailyPrice)
+            .HasPrecision(10, 2);
+        modelBuilder.Entity<Rental>()
+            .Property(r => r.TotalCost)
+            .HasPrecision(10, 2);
+        
     }
 }
