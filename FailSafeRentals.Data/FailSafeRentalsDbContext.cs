@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
-using FailSafeRentals.ConsoleApp.Models;
 using Microsoft.Extensions.Logging;
+
+using FailSafeRentals.Core.Models;
 
 namespace FailSafeRentals.ConsoleApp.Data;
 
@@ -16,15 +16,23 @@ public class FailSafeRentalsDbContext : DbContext
     public DbSet<DamageReport> DamageReports { get; set; }
     public DbSet<MaintenanceTag> MaintenanceTags { get; set; }
 
+    public FailSafeRentalsDbContext() { }
+
+    public FailSafeRentalsDbContext(DbContextOptions<FailSafeRentalsDbContext> options)
+        : base(options) { }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;")
-            .LogTo(Console.WriteLine, LogLevel.Information)
-            .EnableSensitiveDataLogging()
-            ;
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;")
+                //.LogTo(Console.WriteLine, LogLevel.Information)
+                //.EnableSensitiveDataLogging()
+                ;
+        }
     }
 
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // 1. Unikt index på registreringsnummer
@@ -87,6 +95,15 @@ public class FailSafeRentalsDbContext : DbContext
                 new RentalStation { Id = 3, StationCode = "MMX-01", City = "Malmö", StreetAddress = "Sturupsvägen 3"}
                 //new RentalStation { Id = 4, StationCode = "OSL-01", City = "Oslo", StreetAddress = "Gardermoen 1"}
             );
+
+        // Korrigera för decimala datatyper
+        modelBuilder.Entity<ExtraFeature>()
+        .Property(v => v.DailyPrice)
+        .HasPrecision(10, 2);
+
+        modelBuilder.Entity<Rental>()
+            .Property(r => r.TotalCost)
+            .HasPrecision(10, 2);
 
     }
 }

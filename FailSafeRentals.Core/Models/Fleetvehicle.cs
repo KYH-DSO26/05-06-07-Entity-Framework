@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace FailSafeRentals.ConsoleApp.Models;
+namespace FailSafeRentals.Core.Models;
 
 public class FleetVehicle
 {

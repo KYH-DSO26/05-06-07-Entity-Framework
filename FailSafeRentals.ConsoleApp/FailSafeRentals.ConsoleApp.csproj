@@ -5,18 +5,42 @@
     <TargetFramework>net11.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>a4bc8cee-d854-46b0-be7f-7a80d105c503</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="microsoft.EntityFrameworkCore.Design" Version="11.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="microsoft.EntityFrameworkCore.SqlServer" Version="11.0.0" />
     <PackageReference Include="microsoft.EntityFrameworkCore.Tools" Version="11.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.extensions.Configuration.Json" Version="11.0.0" />
+    <PackageReference Include="Microsoft.extensions.Configuration.UserSecrets" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FailSafeRentals.Core\FailSafeRentals.Core.csproj" />
+    <ProjectReference Include="..\FailSafeRentals.Data\FailSafeRentals.Data.csproj" />
   </ItemGroup>
 
 </Project>
