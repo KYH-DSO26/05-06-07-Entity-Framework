@@ -15,7 +15,7 @@ using var _db = new FailSafeRentalsDbContext();
 //ListaBilar();
 
 // UPPGIFT 3: .Find(1) vs .FirstOrDefault() (Minnescache vs SQL)
-//ListaBil();
+ListaBil();
 
 // UPPGIFT 4: Update (Change Tracker uppdaterar bara ändrad kolumn)
 //UppdateraFordon();
@@ -34,25 +34,25 @@ using var _db = new FailSafeRentalsDbContext();
 //LäsInTextFil();
 
 // UPPGIFT 9: Realtidsväder från Open-Meteo API
-await HämtaVäderDataAsync();
+//await HämtaVäderDataAsync();
 
 // UPPGIFT 10: Många-till-många med ExtraFeatures
-LäggTillExtraFeatures();
+//LäggTillExtraFeatures();
 
 // UPPGIFT 11: Säkerhetsverifiering mot SQL Injection
-TestaSqlInjection();
+//TestaSqlInjection();
 
 // UPPGIFT 12: Säkert rå-SQL-anrop med .FromSqlInterpolated()
-HämtaFordonSäkerRåSql();
+//HämtaFordonSäkerRåSql();
 
 // UPPGIFT 13: Anropa Stored Procedure (usp_) via EF Core
-AnropaStoredProcedure();
+//AnropaStoredProcedure();
 
 // UPPGIFT 14: Aggregering och intäktsstatistik med .GroupBy()
-VisaIntäktsStatistikPerMärke();
+//VisaIntäktsStatistikPerMärke();
 
 // UPPGIFT 15: Bygg och testa återanvändbar RentalService inför Lektion 7
-await TestaRentalServiceAsync();
+//await TestaRentalServiceAsync();
 
 
 if (Debugger.IsAttached)
@@ -113,7 +113,7 @@ void ListaBil()
     var carByReg = _db.Vehicles
         .FirstOrDefault(v => v.RegistrationNumber == "ABC123"); // Skickar alltid SELECT TOP (1)
 
-    Console.WriteLine($"\nFirstOrDefault: {carById?.Model}\n");
+    Console.WriteLine($"\nFirstOrDefault: {carById.RegistrationNumber} - {carById.Brand} {carById?.Model}\n");
 }
 
 void UppdateraFordon()
