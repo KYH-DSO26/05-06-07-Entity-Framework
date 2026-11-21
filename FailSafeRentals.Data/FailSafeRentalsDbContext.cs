@@ -48,8 +48,17 @@ public class FailSafeRentalsDbContext : DbContext
             .IsUnique();
 
         // 2. Explicit precision för pengar i LocalDB
+        //    Sök på "public decimal" för att hitta alla
         modelBuilder.Entity<Vehicle>()
             .Property(v => v.DailyRate)
+            .HasPrecision(10, 2);
+
+        modelBuilder.Entity<Rental>()
+            .Property(v => v.TotalCost)
+            .HasPrecision(10, 2);
+
+        modelBuilder.Entity<ExtraFeature>()
+            .Property(v => v.DailyPrice)
             .HasPrecision(10, 2);
 
         // 3. Shadow Property för SecOps-spårbarhet
