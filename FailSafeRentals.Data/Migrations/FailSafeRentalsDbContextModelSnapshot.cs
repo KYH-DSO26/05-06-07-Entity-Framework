@@ -16,7 +16,7 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
     // If you encounter a merge conflict in the line below, it means you need to
     // discard one of the migration branches and recreate its migrations on top of
     // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261118151820_AddStoredProcedureGetVehiclesAboveRate";
+    public override string LastMigrationId => "20261122060033_SeedData";
 
     protected override void BuildModel(ModelBuilder modelBuilder)
     {
@@ -40,6 +40,33 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                 b.HasIndex("VehiclesId");
 
                 b.ToTable("ExtraFeatureVehicle");
+
+                b.HasData(
+                    new
+                    {
+                        ExtraFeaturesId = 1,
+                        VehiclesId = 1
+                    },
+                    new
+                    {
+                        ExtraFeaturesId = 4,
+                        VehiclesId = 1
+                    },
+                    new
+                    {
+                        ExtraFeaturesId = 5,
+                        VehiclesId = 2
+                    },
+                    new
+                    {
+                        ExtraFeaturesId = 2,
+                        VehiclesId = 3
+                    },
+                    new
+                    {
+                        ExtraFeaturesId = 3,
+                        VehiclesId = 4
+                    });
             });
 
         modelBuilder.Entity("FailSafeRentals.Core.Models.Customer", b =>
@@ -68,6 +95,43 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                 b.HasKey("Id");
 
                 b.ToTable("Customers");
+
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        DriverLicenseNumber = "19850412-1234",
+                        Email = "anna.lindqvist@example.se",
+                        FullName = "Anna Lindqvist"
+                    },
+                    new
+                    {
+                        Id = 2,
+                        DriverLicenseNumber = "19901123-5678",
+                        Email = "erik.svensson@example.se",
+                        FullName = "Erik Svensson"
+                    },
+                    new
+                    {
+                        Id = 3,
+                        DriverLicenseNumber = "19780205-9012",
+                        Email = "maria.berg@example.se",
+                        FullName = "Maria Berg"
+                    },
+                    new
+                    {
+                        Id = 4,
+                        DriverLicenseNumber = "19950719-3456",
+                        Email = "johan.ekstrom@example.se",
+                        FullName = "Johan Ekström"
+                    },
+                    new
+                    {
+                        Id = 5,
+                        DriverLicenseNumber = "19880930-7890",
+                        Email = "sofia.holm@example.se",
+                        FullName = "Sofia Holm"
+                    });
             });
 
         modelBuilder.Entity("FailSafeRentals.Core.Models.ExtraFeature", b =>
@@ -79,7 +143,8 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                 SqlServerPropertyBuilderExtensions.UseIdentityColumn(id);
 
                 b.Property<decimal>("DailyPrice")
-                    .HasColumnType("decimal(18,2)");
+                    .HasPrecision(10, 2)
+                    .HasColumnType("decimal(10,2)");
 
                 b.Property<string>("Name")
                     .IsRequired()
@@ -89,6 +154,38 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                 b.HasKey("Id");
 
                 b.ToTable("ExtraFeatures");
+
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        DailyPrice = 75m,
+                        Name = "GPS-navigator"
+                    },
+                    new
+                    {
+                        Id = 2,
+                        DailyPrice = 100m,
+                        Name = "Barnstol"
+                    },
+                    new
+                    {
+                        Id = 3,
+                        DailyPrice = 150m,
+                        Name = "Takbox"
+                    },
+                    new
+                    {
+                        Id = 4,
+                        DailyPrice = 50m,
+                        Name = "Vinterdäck"
+                    },
+                    new
+                    {
+                        Id = 5,
+                        DailyPrice = 200m,
+                        Name = "Extra försäkring"
+                    });
             });
 
         modelBuilder.Entity("FailSafeRentals.Core.Models.Rental", b =>
@@ -114,7 +211,8 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                     .HasColumnType("datetime2");
 
                 b.Property<decimal>("TotalCost")
-                    .HasColumnType("decimal(18,2)");
+                    .HasPrecision(10, 2)
+                    .HasColumnType("decimal(10,2)");
 
                 b.Property<int>("VehicleId")
                     .HasColumnType("int");
@@ -126,6 +224,51 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                 b.HasIndex("VehicleId");
 
                 b.ToTable("Rentals");
+
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        CustomerId = 1,
+                        EndDate = new DateTime(2026, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        StartDate = new DateTime(2026, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        TotalCost = 2550m,
+                        VehicleId = 1
+                    },
+                    new
+                    {
+                        Id = 2,
+                        CustomerId = 2,
+                        StartDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        TotalCost = 0m,
+                        VehicleId = 2
+                    },
+                    new
+                    {
+                        Id = 3,
+                        CustomerId = 3,
+                        EndDate = new DateTime(2026, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        StartDate = new DateTime(2026, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        TotalCost = 1400m,
+                        VehicleId = 3
+                    },
+                    new
+                    {
+                        Id = 4,
+                        CustomerId = 4,
+                        EndDate = new DateTime(2026, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        StartDate = new DateTime(2026, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        TotalCost = 5500m,
+                        VehicleId = 4
+                    },
+                    new
+                    {
+                        Id = 5,
+                        CustomerId = 5,
+                        StartDate = new DateTime(2026, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        TotalCost = 0m,
+                        VehicleId = 5
+                    });
             });
 
         modelBuilder.Entity("FailSafeRentals.Core.Models.Vehicle", b =>
@@ -164,6 +307,53 @@ partial class FailSafeRentalsDbContextModelSnapshot : ModelSnapshot
                     .IsUnique();
 
                 b.ToTable("Vehicles");
+
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        Brand = "Volvo",
+                        DailyRate = 850m,
+                        IsAvailable = true,
+                        Model = "C30",
+                        RegistrationNumber = "ABC234"
+                    },
+                    new
+                    {
+                        Id = 2,
+                        Brand = "Polestar",
+                        DailyRate = 1200m,
+                        IsAvailable = false,
+                        Model = "2",
+                        RegistrationNumber = "DEF567"
+                    },
+                    new
+                    {
+                        Id = 3,
+                        Brand = "Volkswagen",
+                        DailyRate = 700m,
+                        IsAvailable = true,
+                        Model = "Golf",
+                        RegistrationNumber = "GHI890"
+                    },
+                    new
+                    {
+                        Id = 4,
+                        Brand = "BMW",
+                        DailyRate = 1100m,
+                        IsAvailable = true,
+                        Model = "320i",
+                        RegistrationNumber = "JKL123"
+                    },
+                    new
+                    {
+                        Id = 5,
+                        Brand = "Toyota",
+                        DailyRate = 550m,
+                        IsAvailable = false,
+                        Model = "Yaris",
+                        RegistrationNumber = "MNO456"
+                    });
             });
 
         modelBuilder.Entity("ExtraFeatureVehicle", b =>
