@@ -2,10 +2,24 @@
 using FailSafeRentals.Data;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 using System.Diagnostics;
 
-using var _db = new FailSafeRentalsDbContext();
+// Ersätter gamla: using var _db = new FailSafeRentalsDbContext();
+var config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: true)
+    .AddUserSecrets<Program>()
+    .Build();
+
+var options = new DbContextOptionsBuilder<FailSafeRentalsDbContext>()
+    .UseSqlServer(config.GetConnectionString("DefaultConnection"))
+    .Options;
+
+using var _db = new FailSafeRentalsDbContext(options);
+
+
+
 
 // Read + filtrering & sortering
 ListaBilar();

@@ -1,38 +1,51 @@
-# .github/workflows/dotnet-ci.yml
-name: FailSafeRentals CI
+name: .NET 11 CI/CD
+
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
-  build-and-script:
+  build-and-test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup .NET 11
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '11.0.x'
-      - name: Build Release & Generate SQL Script
-        run: |
-          dotnet build FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj \
-            --configuration Release
+    - uses: actions/checkout@v4
 
-          dotnet tool install --global dotnet-ef
+    - name: Setup .NET 11
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '11.0.x'
 
-          dotnet ef migrations script \
-            --idempotent \
-            --output release-migration.sql \
-            --project FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj
+    - name: Restore dependencies
+      run: dotnet restore
 
-          # Under lektion 6 ändras detta till:
-          # dotnet ef migrations script \
-          #   --idempotent \
-          #   --output release-migration.sql \
-          #   --project FailSafeRentals.Data/FailSafeRentals.Data.csproj \
-          #   --startup-project FailSafeRentals.ConsoleApp/FailSafeRentals.ConsoleApp.csproj
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
 
-      - name: Upload SQL Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: database-migration-sql
-          path: release-migration.sql
+    - name: Test
+      run: dotnet test --no-build --configuration Release --verbosity normal
+
+  deploy:
+    needs: build-and-test
+    runs-on: windows-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET 11
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '11.0.x'
+
+    - name: Publish API
+      run: dotnet publish FailSafeRentals.Api/FailSafeRentals.Api.csproj -c Release -o ./publish
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: 'failsaferentals-claes' # <-- ÄNDRA TILL ERT APP SERVICE-NAMN!
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ./publish
