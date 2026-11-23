@@ -28,7 +28,7 @@ public class FailSafeRentalsDbContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlServer(
-                @"Server=(localdb)\MSSQLLocalDB;Database=FailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;")
+                @"Server=(localdb)\MSSQLLocalDB;Database=xxxFailSafeRentals;Trusted_Connection=True;TrustServerCertificate=True;")
             //Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FailSafeIT;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30
                 //.LogTo(Console.WriteLine, LogLevel.Information)
                 //.EnableSensitiveDataLogging()   // Endast i dev - visar parametervärden!
