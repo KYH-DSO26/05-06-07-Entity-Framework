@@ -33,7 +33,7 @@ app.UseHttpsRedirection();
 app.MapGet("/api/status", (IWebHostEnvironment env) => Results.Ok(new
 {
     Service = "FailSafe Rentals API",
-    Version = "1.0.0",
+    Version = "1.0.1",
     Environment = env.EnvironmentName
 }));
 
