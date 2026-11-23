@@ -15,3 +15,5 @@ Undervisningen bygger på konceptet *flippat klassrum* där de studerande ska ha
 Vi har undervisning två dagar i veckan, från 08:30 till 13:00. 45 minuters undervisning följt av 15 minuters rast.
 
 Varje film och lektionspass får en egen gren i repot, medan main-grenen följer med lektionerna. Efter varje lektionstillfälle trycks grenen upp till repot och det görs en merge av grenen in till main. Grenarna för filmerna hålls separata. På så vis kan någon i efterhand ta fram filmen och dess gren och följa med.
+
+Dessvärre gjorde läraren ett misstag i början av Lektion 7, och glömde att skapa en ny gren. Hela lektion 7 kördes direkt mot main. Nu spelar det inte så stor roll, eftersom slutresultatet blev detsamma.
